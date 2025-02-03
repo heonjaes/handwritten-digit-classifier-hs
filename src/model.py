@@ -7,7 +7,7 @@ from extraction import load_mnist_data_raw
 from transformation import process_data, augment_data
 from tensorflow.keras.utils import plot_model
 
-def build_dnn_model(input_shape):
+def build_dnn_model():
     """
     Build a deep neural network (DNN) model.
     """
@@ -71,7 +71,7 @@ def main():
     print(f"Test data shape (processed): {x_test.shape}, Test labels shape: {y_test.shape}")
     
     # Create the model
-    model = build_dnn_model(input_shape=(28, 28, 1))
+    model = build_dnn_model()
 
     # Display the model summary
     print("\nModel Summary:")
