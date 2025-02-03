@@ -16,11 +16,14 @@ This repository contains the code for a **Handwritten Digit Classifier Web App**
 handwritten-digit-classifier/
 ├── app.py                # Main entry point for the FastAPI backend
 ├── data/                 # Contains datasets used for training the model
-│   └── ...               # Data files
+│   ├── img/              # Contains accuracy and loss plot images
+│   ├── input/            # Contains raw, grayscaled, and scaled images from the web app canvas
 ├── model/                # Trained machine learning model
 │   └── model.h5          # Neural network model
 ├── src/                  # Source code for the backend (FastAPI)
-│   └── ...               # Backend logic for prediction, data processing
+│   └── model.py          # Final training code to generate DNN
+│   └── transformation.py # Trasformations applied to MNIST dataset
+│   └── data_exploration.py # Data exploration and experiments run in Notebook
 ├── web/                  # Frontend code
 │   ├── index.html        # HTML file for the web interface
 │   ├── style.css         # Custom styles for the web app
@@ -105,6 +108,3 @@ The app should now be accessible at `http://localhost:3000`.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
-
-This version highlights Python, TensorFlow, and FastAPI as key backend components, while also mentioning the frontend development stack.
