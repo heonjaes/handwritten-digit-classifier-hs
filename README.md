@@ -19,7 +19,7 @@ handwritten-digit-classifier/
 │   ├── img/              # Contains accuracy and loss plot images
 │   ├── input/            # Contains raw, grayscaled, and scaled images from the web app canvas
 ├── model/                # Trained machine learning model
-│   └── model.h5          # Neural network model
+│   └── dnn_mnist_model.h5          # Neural network model
 ├── src/                  # Source code for the backend (FastAPI)
 │   └── model.py          # Final training code to generate DNN
 │   └── transformation.py # Trasformations applied to MNIST dataset
