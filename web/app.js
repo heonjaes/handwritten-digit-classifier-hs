@@ -35,6 +35,7 @@ canvas.addEventListener('mouseup', () => {
 document.getElementById('clear-btn').addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById('prediction').textContent = 'None';
+    clearChart();
 });
 
 // Handle prediction request
@@ -91,5 +92,63 @@ async function sendImageToBackend(imageData) {
 
     const result = await response.json();
     document.getElementById('prediction').textContent = result.label;
-    // Optionally display probabilities or any other information from the result
+
+    // Update the chart with the probabilities
+    updateChart(result.probabilities);
+}
+
+// Initialize Chart.js
+const ctxChart = document.getElementById('bar-chart').getContext('2d');
+const probabilityChart = new Chart(ctxChart, {
+    type: 'bar',
+    data: {
+        labels: Array.from({ length: 10 }, (_, i) => i), // Labels for 10 classes
+        datasets: [{
+            label: 'Prediction Probabilities',
+            data: Array(10).fill(0), // Initial empty data for probabilities
+            backgroundColor: '#a8dadc',
+            borderColor: '#a8dadc',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Class Labels', // Label for the X-axis
+                    color: '#333',
+                    font: {
+                        size: 14,
+                    }
+                }
+            },
+            y: {
+                beginAtZero: true,
+                max: 1,
+                title: {
+                    display: true,
+                    text: 'Probability', // Label for the Y-axis
+                    color: '#333',
+                    font: {
+                        size: 14,
+                    }
+                }
+            }
+        }
+    }
+});
+
+
+// Update chart with new probabilities
+function updateChart(probabilities) {
+    probabilityChart.data.datasets[0].data = probabilities;
+    probabilityChart.update();
+}
+
+// Clear chart
+function clearChart() {
+    probabilityChart.data.datasets[0].data = Array(10).fill(0);
+    probabilityChart.update();
 }
