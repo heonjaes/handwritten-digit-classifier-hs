@@ -3,7 +3,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 // Set up canvas settings
-ctx.lineWidth = 15;
+ctx.lineWidth = 20;
 ctx.lineCap = 'round';
 ctx.lineJoin = 'round';
 ctx.strokeStyle = 'black';
@@ -40,6 +40,7 @@ document.getElementById('clear-btn').addEventListener('click', () => {
 
 // Handle prediction request
 document.getElementById('predict-btn').addEventListener('click', async () => {
+    const canvas = document.getElementById('canvas');
     const imageData = canvas.toDataURL('image/png');  // Get image data as base64 string
 
     // Process image to make empty space white
@@ -91,12 +92,27 @@ async function sendImageToBackend(imageData) {
     });
 
     const result = await response.json();
+
+    // Update the prediction result label
     document.getElementById('prediction').textContent = result.label;
+
+    // Update image sources with base64 data
+    document.getElementById('grayscale-img').src = `data:image/png;base64,${result.grayscale_image_base64}`;
+    document.getElementById('processed-img').src = `data:image/png;base64,${result.processed_image_base64}`;
 
     // Update the chart with the probabilities
     updateChart(result.probabilities);
 }
 
+// Update chart with new probabilities
+function updateChart(probabilities) {
+    probabilityChart.data.datasets[0].data = probabilities;
+    probabilityChart.update();
+}
+
+
+
+// Initialize Chart.js
 // Initialize Chart.js
 const ctxChart = document.getElementById('bar-chart').getContext('2d');
 const probabilityChart = new Chart(ctxChart, {
@@ -106,13 +122,19 @@ const probabilityChart = new Chart(ctxChart, {
         datasets: [{
             label: 'Prediction Probabilities',
             data: Array(10).fill(0), // Initial empty data for probabilities
-            backgroundColor: '#a8dadc',
-            borderColor: '#a8dadc',
-            borderWidth: 1
+            backgroundColor: '#4CAF50', // Green color for bars
+            borderColor: '#388E3C',     // Darker green for the border
+            borderWidth: 1,
+            hoverBackgroundColor: '#81C784', // Light green on hover
+            hoverBorderColor: '#388E3C',     // Darker green on hover
         }]
     },
     options: {
         responsive: true,
+        animation: {
+            duration: 1000, // Animation duration
+            easing: 'easeOutBounce', // Smooth bounce animation
+        },
         scales: {
             x: {
                 title: {
@@ -121,6 +143,12 @@ const probabilityChart = new Chart(ctxChart, {
                     color: '#333',
                     font: {
                         size: 14,
+                        weight: 'bold',
+                    }
+                },
+                ticks: {
+                    font: {
+                        size: 12
                     }
                 }
             },
@@ -133,13 +161,28 @@ const probabilityChart = new Chart(ctxChart, {
                     color: '#333',
                     font: {
                         size: 14,
+                        weight: 'bold',
                     }
+                },
+                ticks: {
+                    font: {
+                        size: 12
+                    },
+                    stepSize: 0.1
                 }
             }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        return `Probability: ${(tooltipItem.raw * 100).toFixed(2)}%`;
+                    }
+                }
+            },
         }
     }
 });
-
 
 // Update chart with new probabilities
 function updateChart(probabilities) {

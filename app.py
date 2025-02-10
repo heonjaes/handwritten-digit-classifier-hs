@@ -4,18 +4,15 @@ from fastapi.staticfiles import StaticFiles
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-import os
 import base64
 from io import BytesIO
-import matplotlib.pyplot as plt
-import io
 import keras
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+import os
 
 app = FastAPI()
 
 # Serve static files (HTML, JS, CSS)
-app.mount("/static", StaticFiles(directory="web"), name="static")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Load the trained model at startup
 MODEL_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "models", "dnn_mnist_model.h5"))
@@ -25,7 +22,7 @@ model = tf.keras.models.load_model(MODEL_PATH)
 @app.get("/", response_class=HTMLResponse)
 async def index():
     """Serve the frontend."""
-    with open("web/index.html", "r") as f:
+    with open("static/index.html", "r") as f:
         return f.read()
 
 def preprocess_image(img: np.ndarray) -> np.ndarray:
@@ -38,6 +35,11 @@ def preprocess_image(img: np.ndarray) -> np.ndarray:
     img = img.reshape(1, 28, 28, 1)  # Reshape for model
     return img
 
+def image_to_base64(img: Image) -> str:
+    """Convert image to base64 string."""
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    return base64.b64encode(buffered.getvalue()).decode("utf-8")
 
 @app.post("/predict")
 async def predict(image: str = Form(...)):
@@ -45,14 +47,14 @@ async def predict(image: str = Form(...)):
     try:
         # Decode the base64 image string
         img_data = base64.b64decode(image)
-        img = Image.open(BytesIO(img_data))  # Open the raw image
+        raw_img = Image.open(BytesIO(img_data))  # Open the raw image
 
         # Convert to grayscale (ensure background is white)
-        img = img.convert("L")  # Grayscale (mode 'L' for luminance)
-        img = img.point(lambda p: p > 200 and 255)  # Set everything but drawn content to white
+        gray_img = raw_img.convert("L")  # Grayscale (mode 'L' for luminance)
+        gray_img = gray_img.point(lambda p: p > 200 and 255)  # Set everything but drawn content to white
 
         # Resize the image to 28x28 (MNIST expected size)
-        resized_img = img.resize((28, 28))
+        resized_img = gray_img.resize((28, 28))
 
         # Convert image to numpy array and preprocess it (normalize and reshape)
         img_array = np.array(resized_img)
@@ -63,10 +65,16 @@ async def predict(image: str = Form(...)):
         predicted_label = int(np.argmax(prediction))  # Most likely digit
         probabilities = prediction.tolist()  # Convert to list for JSON response
 
-        # Return result as JSON
+        # Convert images to base64
+        grayscale_image_b64 = image_to_base64(gray_img)
+        processed_image_b64 = image_to_base64(Image.fromarray((img_array[0, :, :, 0] * 255).astype(np.uint8)))
+
+        # Return result as JSON with base64-encoded images
         return {
             "label": predicted_label,
             "probabilities": probabilities,
+            "grayscale_image_base64": grayscale_image_b64,
+            "processed_image_base64": processed_image_b64
         }
     except Exception as e:
         print("Error during prediction:", e)  # Print the error for debugging
