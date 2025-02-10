@@ -17,6 +17,8 @@ button {
 
 .navbar-brand {
   color: #1D1D1F;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 
@@ -42,6 +44,7 @@ button {
 h1, h3 {
   color: #1D1D1F;
   font-size: 24px;
+  font-weight: normal;
 }
 
 @media (max-width: 767px) {
