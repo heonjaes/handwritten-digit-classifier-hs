@@ -1,54 +1,110 @@
+/* General styles */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background-color: #f5f5f7;
+  background-color: #f5f5f8;
 }
 
+/* Navbar */
+.navbar-brand {
+  color: #1D1D1F;
+  font-size: 24px;
+  font-weight: bold;  
+}
+
+nav {
+  background-color: #e6e6e6;
+}
+
+/* Layout adjustments */
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* Column adjustments */
+.col-custom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.col-custom img {
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Canvas styling */
 canvas {
   border: 2px solid #ddd;
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Buttons */
 button {
   padding: 12px 24px;
   font-size: 16px;
   margin: 5px;
 }
 
-.navbar-brand {
-  color: #1D1D1F;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-
-#chart-container {
-  width: 1000%;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
+/* Prediction styling */
 #prediction {
   font-weight: bold;
   font-size: 2rem;
   color: #33b8b8;
 }
 
-.resized-image {
-  width: 400px;  /* Adjust width as needed to make the image larger */
-  height: auto;  /* Maintain aspect ratio */
-  image-rendering: pixelated; /* Disable smoothing */
+/* Chart container */
+#chart-container {
+  width: 100%;
+  max-width: 700px;
+  margin: 30px auto;
 }
 
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin-top: 30px;
+}
 
-h1, h3 {
+/* Processed image */
+.resized-image {
+  width: 400px;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+/* Text styling */
+h1, h3, h4 {
   color: #1D1D1F;
   font-size: 24px;
   font-weight: normal;
 }
 
-@media (max-width: 767px) {
-  .col-md-6 {
-    margin-top: 20px;
-  }
+/* Custom button styles */
+#clear-btn {
+  background-color: #E74C3C; /* Soft red background */
+  border-color: #E74C3C; /* Soft red border */
+  color: white; /* Text color */
+}
+
+#clear-btn:hover {
+  background-color: #C0392B; /* Darker red on hover */
+  border-color: #C0392B; /* Darker red border */
+}
+
+#predict-btn {
+  background-color: #3498DB; /* Soft blue background */
+  border-color: #3498DB; /* Soft blue border */
+  color: white; /* Text color */
+}
+
+#predict-btn:hover {
+  background-color: #2980B9; /* Darker blue on hover */
+  border-color: #2980B9; /* Darker blue border */
 }
