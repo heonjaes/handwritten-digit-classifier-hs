@@ -15,21 +15,23 @@ This repository contains the code for a **Handwritten Digit Classifier Web App**
 ```
 handwritten-digit-classifier/
 ├── app.py                # Main entry point for the FastAPI backend
-├── data/                 # Contains datasets used for training the model
-│   ├── img/              # Contains accuracy and loss plot images
-│   ├── input/            # Contains raw, grayscaled, and scaled images from the web app canvas
-├── model/                # Trained machine learning model
-│   └── dnn_mnist_model.h5          # Neural network model
+├── data/                 # Contains datasets used for training and testing the model
+│   └── mnist_data.csv    # Example dataset (MNIST) for handwritten digits
+├── model/                # Trained machine learning models
+│   └── simple_dnn_rotation_6.h5  # Neural network model trained with rotation augmentations
 ├── src/                  # Source code for the backend (FastAPI)
-│   └── model.py          # Final training code to generate DNN
-│   └── transformation.py # Trasformations applied to MNIST dataset
-│   └── data_exploration.py # Data exploration and experiments run in Notebook
-├── web/                  # Frontend code
+│   └── model.py          # Code for model architecture and training
+│   └── experimentation.py        # Scripts for running experiments on neural networks
+│   └── extraction.py     # Extracts MNIST data from TensorFlow API
+│   └── transformation.py # Data augmentation transformations applied to MNIST dataset
+│   └── data_exploration.ipynb    # Jupyter notebook for exploring the dataset and running experiments
+├── static/               # Frontend code (HTML, CSS, JavaScript files)
 │   ├── index.html        # HTML file for the web interface
 │   ├── style.css         # Custom styles for the web app
 │   ├── app.js            # JavaScript logic for frontend functionality
-│   └── ...               # Additional static files for the frontend
-└── requirements.txt      # Backend dependencies
+│   └── ...               # Additional static files (e.g., images, assets) for the frontend
+└── requirements.txt      # Backend dependencies (FastAPI, TensorFlow, etc.)
+└── .gitignore            # Git ignore file to exclude unnecessary files from version control
 ```
 
 ## Features
@@ -40,6 +42,12 @@ handwritten-digit-classifier/
 - **Probability Chart**: Visualizes the prediction probabilities using a bar chart.
 
 ## Tech Stack
+
+### Development
+
+This project uses **MLFlow** to experiment with different neural network architectures, ranging from simple models to deeper models with varying degrees of augmentation applied to the dataset. By leveraging MLFlow's experiment tracking, we were able to compare the performance of each model, fine-tune hyperparameters, and monitor training progress. The **best performing model** was selected and saved for deployment.
+
+The development process also involved working with a **Jupyter Notebook** for data exploration and running experiments on the MNIST dataset. The notebook allowed us to visualize the data and experiment with various transformations applied to the dataset.
 
 ### Backend
 
@@ -53,11 +61,17 @@ handwritten-digit-classifier/
 - **Bootstrap 5**: For responsive design and easy styling.
 - **Chart.js**: Used for visualizing prediction probabilities as a bar chart.
 
+### Deployment
+
+- **CI/CD**: The frontend is deployed using **GitHub Pages** via a continuous integration/continuous deployment (CI/CD) pipeline. This allows the frontend to be automatically built and deployed whenever changes are made to the repository.
+- **GCP Cloud Run**: The backend, powered by FastAPI, is deployed to **Google Cloud Run**, a fully managed platform that automatically scales the backend based on demand.
+
+
 ## Getting Started
 
 ### Prerequisites
 
-- Python 3.7 or above
+- Python 3.11.10 or above
 - Node.js and npm (for frontend dependencies)
 - FastAPI for the backend
 
