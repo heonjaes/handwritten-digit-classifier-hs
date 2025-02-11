@@ -15,7 +15,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Load the trained model at startup
-MODEL_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "models", "dnn_mnist_model.h5"))
+MODEL_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "models", "simple_dnn_rotation_6.h5"))
 model = tf.keras.models.load_model(MODEL_PATH)
 
 @app.get("/", response_class=HTMLResponse)
