@@ -15,8 +15,6 @@ This repository contains the code for a **Handwritten Digit Classifier Web App**
 ```
 handwritten-digit-classifier/
 ├── app.py                # Main entry point for the FastAPI backend
-├── data/                 # Contains datasets used for training and testing the model
-│   └── mnist_data.csv    # Example dataset (MNIST) for handwritten digits
 ├── model/                # Trained machine learning models
 │   └── simple_dnn_rotation_6.h5  # Neural network model trained with rotation augmentations
 ├── src/                  # Source code for the backend (FastAPI)
