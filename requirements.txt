@@ -9,3 +9,4 @@ keras==3.5.0
 matplotlib==3.9.2
 mlflow==2.20.1
 pillow==10.4.0
+python-multipart==0.0.20
