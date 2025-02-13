@@ -3,3 +3,5 @@
 
 # Ignore all mlruns folders at any level
 **/mlruns/
+
+.gitattributes
