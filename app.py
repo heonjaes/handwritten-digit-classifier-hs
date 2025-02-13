@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Form, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware  # Import CORSMiddleware
 import tensorflow as tf
 import numpy as np
 from PIL import Image
@@ -14,20 +13,7 @@ import uvicorn
 # Initialize FastAPI app
 app = FastAPI()
 
-# Allow CORS from GitHub Pages (Replace with your GitHub Pages URL)
-origins = [
-    "https://heonjaes.github.io/handwritten-digit-classifier-hs/",  
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,  # Allows requests from the specified origin
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
-    allow_headers=["*"],  # Allows all headers
-)
-
-# Serve static files (HTML, JS, CSS) from GitHub Pages
+# Serve static files (HTML, JS, CSS)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Load the trained model at startup
@@ -97,7 +83,6 @@ async def predict(image: str = Form(...)):
     except Exception as e:
         print(f"Error during prediction: {e}")  # Log the error for debugging
         raise HTTPException(status_code=400, detail="Invalid image data or processing error")
-
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8080))

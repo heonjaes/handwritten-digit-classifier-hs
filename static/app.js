@@ -80,10 +80,9 @@ async function sendImageToBackend(imageData) {
     const formData = new FormData();
     formData.append('image', imageData.split(',')[1]); // Extract base64 string
 
-    // Update this URL to your backend URL where FastAPI is hosted
-    const response = await fetch('https://mnist-backend-service-759393787727.australia-southeast1.run.app/predict', { 
-        method: 'POST', 
-        body: formData 
+    const response = await fetch('/predict', {
+        method: 'POST',
+        body: formData
     });
 
     const result = await response.json();
@@ -97,7 +96,6 @@ async function sendImageToBackend(imageData) {
 
     updateChart(result.probabilities); // Update chart with probabilities
 }
-
 
 // Define bar colors
 const barColors = [
