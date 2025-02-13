@@ -17,7 +17,7 @@ def process_data(x_train_raw, x_test_raw):
 
     return x_train, x_test
 
-def augment_data(x_train):
+def augment_data(x_train, rotation_range=12):
     """
     Augment the training data using transformations like rotations, shifts, and zooms.
     """
