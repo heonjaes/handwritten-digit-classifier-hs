@@ -3,47 +3,47 @@
 name: Deploy Static Content to GitHub Pages
 
 # Trigger deployment on push to the 'main' branch or when manually triggered
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+# on:
+#   push:
+#     branches:
+#       - main
+#   workflow_dispatch:
 
-# Set GitHub token permissions to enable deployment
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# # Set GitHub token permissions to enable deployment
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
 
-# Ensure only one deployment is running at a time, without canceling in-progress ones
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+# # Ensure only one deployment is running at a time, without canceling in-progress ones
+# concurrency:
+#   group: "pages"
+#   cancel-in-progress: false
 
-jobs:
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+# jobs:
+#   # Deployment job
+#   deploy:
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+#     runs-on: ubuntu-latest
 
-    steps:
-      # 1. Checkout the repository
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+#     steps:
+#       # 1. Checkout the repository
+#       - name: Checkout Repository
+#         uses: actions/checkout@v4
 
-      # 2. Set up GitHub Pages
-      - name: Set up Pages
-        uses: actions/configure-pages@v5
+#       # 2. Set up GitHub Pages
+#       - name: Set up Pages
+#         uses: actions/configure-pages@v5
 
-      # 3. Upload the content to be deployed
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './static'  # Path to your static files
+#       # 3. Upload the content to be deployed
+#       - name: Upload artifact
+#         uses: actions/upload-pages-artifact@v3
+#         with:
+#           path: './static'  # Path to your static files
 
-      # 4. Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+#       # 4. Deploy to GitHub Pages
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v4
