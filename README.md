@@ -8,9 +8,13 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
+![mnist.gif](data/img/mnist_small.gif)
+
 This repository contains the code for a **Handwritten Digit Classifier Web App**. The app allows users to draw a digit on a canvas, and it returns a prediction based on a neural network model built using **TensorFlow**. The backend is powered by **FastAPI**, providing high performance and ease of development, while the frontend is developed using **HTML**, **CSS**, and **JavaScript**.
 
-![mnist.gif](data/img/mnist.gif)
+## Architecture
+![diagram](data/img/MNIST_architecture.png)
+
 
 ## Folder Structure
 
@@ -33,7 +37,6 @@ handwritten-digit-classifier/
 └── requirements.txt      # Backend dependencies (FastAPI, TensorFlow, etc.)
 └── .gitignore            # Git ignore file to exclude unnecessary files from version control
 ```
-
 ## Features
 
 - **Canvas for Drawing**: Users can draw a digit on the canvas.
@@ -47,7 +50,7 @@ handwritten-digit-classifier/
 
 This project uses **MLFlow** to experiment with different neural network architectures, ranging from simple models to deeper models with varying degrees of augmentation applied to the dataset. By leveraging MLFlow's experiment tracking, we were able to compare the performance of each model, fine-tune hyperparameters, and monitor training progress. The **best performing model** was selected and saved for deployment.
 
-The development process also involved working with a **Jupyter Notebook** for data exploration and running experiments on the MNIST dataset. The notebook allowed us to visualize the data and experiment with various transformations applied to the dataset.
+The development process also involved working with a **Python** for data exploration and running experiments on the MNIST dataset. The notebook allowed us to visualize the data and experiment with various transformations applied to the dataset.
 
 ### Backend
 
@@ -61,10 +64,12 @@ The development process also involved working with a **Jupyter Notebook** for da
 - **Bootstrap 5**: For responsive design and easy styling.
 - **Chart.js**: Used for visualizing prediction probabilities as a bar chart.
 
-### Deployment
+### Deployment  
 
-- **CI/CD**: The frontend is deployed using **GitHub Pages** via a continuous integration/continuous deployment (CI/CD) pipeline. This allows the frontend to be automatically built and deployed whenever changes are made to the repository.
-- **GCP Cloud Run**: The backend, powered by FastAPI, is deployed to **Google Cloud Run**, a fully managed platform that automatically scales the backend based on demand.
+-  **GCP Cloud Run**: The backend, powered by FastAPI, is deployed to **Google Cloud Run**, a fully managed platform that automatically scales the backend based on demand.  
+-  **Docker**: The app is containerized using Docker for consistency and portability across environments.  
+-  **Terraform**: Infrastructure management and deployment are automated using Terraform for a streamlined setup and configuration.  
+-  **Google Container Registry (GCR)**: Docker images are stored and managed in **Google Container Registry (GCR)**, making it easy to deploy containers to GCP services like Cloud Run.
 
 
 ## Getting Started
@@ -102,15 +107,8 @@ npm install
 ```bash
 uvicorn app:app --reload
 ```
+The backend will now be running, and the app should be accessible at `http://localhost:8080`.
 
-5. **Run the frontend**
-
-```bash
-cd web
-npm start
-```
-
-The app should now be accessible at `http://localhost:3000`.
 
 ## Usage
 
