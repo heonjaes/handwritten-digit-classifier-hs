@@ -2,7 +2,10 @@
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![TensorFlow](https://img.shields.io/badge/tensorflow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-4.x-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![GCP](https://img.shields.io/badge/GCP-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi&logoColor=white)
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
@@ -21,6 +24,7 @@ This repository contains the code for a **Handwritten Digit Classifier Web App**
 ```
 handwritten-digit-classifier/
 ├── app.py                # Main entry point for the FastAPI backend
+├── data/                 # Folder containing relevant images for README
 ├── model/                # Trained machine learning models
 │   └── simple_dnn_rotation_6.h5  # Neural network model trained with rotation augmentations
 ├── src/                  # Source code for the backend (FastAPI)
