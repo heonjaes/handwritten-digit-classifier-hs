@@ -50,11 +50,18 @@ handwritten-digit-classifier/
 
 ## Tech Stack
 
-### Development
+### Model Development and Experimentation
 
-This project uses **MLFlow** to experiment with different neural network architectures, ranging from simple models to deeper models with varying degrees of augmentation applied to the dataset. By leveraging MLFlow's experiment tracking, we were able to compare the performance of each model, fine-tune hyperparameters, and monitor training progress. The **best performing model** was selected and saved for deployment.
+In this project, we utilised **Tensorflow** and  **MLFlow** to experiment with various neural network architectures and augmentations to improve the performance of the handwritten digit classifier.
 
-The development process also involved working with a **Python** for data exploration and running experiments on the MNIST dataset. The notebook allowed us to visualize the data and experiment with various transformations applied to the dataset.
+The models experimented with include:
+
+- **Simple DNN with Rotation Augmentation (Range 6)**: This model uses a simple convolutional neural network (CNN) with a rotation range of 6 degrees for augmenting the training dataset.
+- **Simple DNN with Rotation Augmentation (Range 12)**: A variation of the simple DNN model with a larger rotation range of 12 degrees for data augmentation.
+- **Deep DNN with Rotation Augmentation (Range 6)**: A deeper CNN model with similar rotation augmentation applied to the training data.
+- **Deep DNN with Rotation Augmentation (Range 12)**: This model uses a deeper CNN architecture and a larger rotation range for data augmentation.
+
+MLFlow was employed for logging the experiments, tracking hyperparameters, training progress, and evaluating performance. Each model's accuracy was recorded, and the best-performing model was selected for deployment.
 
 ### Backend
 
@@ -75,7 +82,6 @@ The development process also involved working with a **Python** for data explora
 -  **Terraform**: Infrastructure management and deployment are automated using Terraform for a streamlined setup and configuration.  
 -  **Google Container Registry (GCR)**: Docker images are stored and managed in **Google Container Registry (GCR)**, making it easy to deploy containers to GCP services like Cloud Run.
 
-
 ## Getting Started
 
 ### Prerequisites
@@ -84,7 +90,7 @@ The development process also involved working with a **Python** for data explora
 - Node.js and npm (for frontend dependencies)
 - FastAPI for the backend
 
-### Installation
+### Installation for Running Locally
 
 1. **Clone the repository**
 
@@ -114,7 +120,7 @@ uvicorn app:app --reload
 The backend will now be running, and the app should be accessible at `http://localhost:8080`.
 
 
-## Usage
+## App Usage
 
 - **Draw a digit**: Use the canvas to draw a digit between 0-9.
 - **Predict the digit**: Click on "Predict" to get the predicted digit and its associated probabilities.
