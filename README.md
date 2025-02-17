@@ -13,7 +13,7 @@
 This repository contains the code for a **Handwritten Digit Classifier Web App**. The app allows users to draw a digit on a canvas, and it returns a prediction based on a neural network model built using **TensorFlow**. The backend is powered by **FastAPI**, providing high performance and ease of development, while the frontend is developed using **HTML**, **CSS**, and **JavaScript**.
 
 ## Architecture
-![diagram](data/img/MNIST_architecture.png)
+![diagram](data/img/MNIST_diagram.png)
 
 
 ## Folder Structure
