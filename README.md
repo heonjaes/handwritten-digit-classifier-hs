@@ -64,6 +64,8 @@ The models experimented with include:
 
 MLFlow was employed for logging the experiments, tracking hyperparameters, training progress, and evaluating performance. Each model's accuracy was recorded, and the best-performing model was selected for deployment.
 
+![experiments](data/img/mlflow_experiments.png)
+
 ### Backend
 
 - **Python**: The backend is written in Python, a powerful programming language known for its simplicity and versatility.
